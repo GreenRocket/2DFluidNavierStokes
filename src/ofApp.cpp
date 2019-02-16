@@ -12,7 +12,7 @@ void ofApp::setup()
 	ofBackground(127, 0, 0);
 
 	fluid = new Fluid();
-	fluidSquare = fluid->FluidSquareCreate(GRID_SIZE, 0.0f, 0.0f, 0.1f);
+	fluidGrid = fluid->Create(GRID_SIZE, 0.0f, 0.0f, 0.1f);
 
 	//fluid->FluidSquareAddVelocity(fluidSquare, GRID_SIZE / 2, GRID_SIZE / 2, 0.1f, 0);
 	//fluid->FluidSquareStep(fluidSquare);
@@ -33,7 +33,7 @@ void ofApp::draw()
 		{
 			float x = static_cast<float>(i * GRID_SCALE);
 			float y = static_cast<float>(j * GRID_SCALE);
-			float f = fluidSquare->density[i + j * GRID_SIZE];
+			float f = fluidGrid->density[i + j * GRID_SIZE];
 			f = (f < 0) ? 0 :
 				(f > 255) ? 255 : f;
 
@@ -51,7 +51,7 @@ void ofApp::draw()
 void ofApp::exit()
 {
 	delete fluid;
-	delete fluidSquare;
+	delete fluidGrid;
 }
 
 //--------------------------------------------------------------
@@ -74,7 +74,7 @@ void ofApp::mouseDragged(int x, int y, int button)
 {
 	if (button == 0)
 	{
-		fluid->FluidSquareAddDensity(fluidSquare, x / GRID_SCALE, y / GRID_SCALE, 100);
+		fluid->AddDensity(fluidGrid, x / GRID_SCALE, y / GRID_SCALE, 100);
 
 
 		//fluid->FluidSquareAddVelocity(fluidSquare, x / GRID_SCALE, y / GRID_SCALE, (x - lastMouseX) / GRID_SCALE, (y - lastMouseY) / GRID_SCALE);
@@ -92,7 +92,7 @@ void ofApp::mousePressed(int x, int y, int button)
 	int x0 = x / GRID_SCALE;
 	int y0 = y / GRID_SCALE;
 
-	ofLog(OF_LOG_NOTICE, "the number is " + ofToString(fluidSquare->density[x0 + y0 * GRID_SIZE]));
+	ofLog(OF_LOG_NOTICE, "the number is " + ofToString(fluidGrid->density[x0 + y0 * GRID_SIZE]));
 }
 
 //--------------------------------------------------------------

@@ -130,7 +130,7 @@ Fluid::Fluid() {}
 
 Fluid::~Fluid() {}
 
-void Fluid::FluidSquareFree(FluidSquare *square)
+void Fluid::Clear(FluidGrid *square)
 {
 	free(square->s);
 	free(square->density);
@@ -144,7 +144,7 @@ void Fluid::FluidSquareFree(FluidSquare *square)
 	free(square);
 }
 
-void Fluid::FluidSquareStep(FluidSquare *square)
+void Fluid::Step(FluidGrid *square)
 {
 	int N = square->size;
 	float visc = square->visc;
@@ -171,13 +171,13 @@ void Fluid::FluidSquareStep(FluidSquare *square)
 	advect(0, density, s, Vx, Vy, dt, N);
 }
 
-void Fluid::FluidSquareAddDensity(FluidSquare *square, int x, int y, float amount)
+void Fluid::AddDensity(FluidGrid *square, int x, int y, float amount)
 {
 	int N = square->size;
 	square->density[IX(x, y)] += amount;
 }
 
-void Fluid::FluidSquareAddVelocity(FluidSquare *square, int x, int y, float amountX, float amountY)
+void Fluid::AddVelocity(FluidGrid *square, int x, int y, float amountX, float amountY)
 {
 	int N = square->size;
 	int index = IX(x, y);
@@ -186,9 +186,9 @@ void Fluid::FluidSquareAddVelocity(FluidSquare *square, int x, int y, float amou
 	square->Vy[index] += amountY;
 }
 
-Fluid::FluidSquare *Fluid::FluidSquareCreate(int size, float diffusion, float viscosity, float dt)
+Fluid::FluidGrid *Fluid::Create(int size, float diffusion, float viscosity, float dt)
 {
-	FluidSquare *square = (FluidSquare*)malloc(sizeof(*square));
+	FluidGrid *square = (FluidGrid*)malloc(sizeof(*square));
 	int N = size;
 
 	square->size	= size;

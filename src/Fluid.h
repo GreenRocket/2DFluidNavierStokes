@@ -6,7 +6,7 @@
 class Fluid
 {
 public:
-	struct FluidSquare
+	struct FluidGrid
 	{
 		int size;
 		float dt;
@@ -26,13 +26,13 @@ public:
 	Fluid();
 	~Fluid();
 
-	void FluidSquareFree(FluidSquare *square);
+	void Clear(FluidGrid *square);
 
-	void FluidSquareStep(FluidSquare *square);
+	void Step(FluidGrid *square);
 
-	void FluidSquareAddDensity(FluidSquare *square, int x, int y, float amount);
+	void AddDensity(FluidGrid *square, int x, int y, float amount);
 
-	void FluidSquareAddVelocity(FluidSquare *square, int x, int y, float amountX, float amountY);
+	void AddVelocity(FluidGrid *square, int x, int y, float amountX, float amountY);
 
-	FluidSquare* FluidSquareCreate(int size, float diffusion, float viscosity, float dt);
+	FluidGrid* Create(int size, float diffusion, float viscosity, float dt);
 };

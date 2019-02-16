@@ -25,7 +25,7 @@ class ofApp : public ofBaseApp{
 		
 
 	Fluid* fluid;
-	Fluid::FluidSquare* fluidSquare;
+	Fluid::FluidGrid* fluidGrid;
 
 	int lastMouseX = 0, lastMouseY = 0;
 };
