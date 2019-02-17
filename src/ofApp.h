@@ -1,31 +1,36 @@
 #pragma once
 
 #include "ofMain.h"
-#include "Fluid.h"
+#include "ofxGui.h"
+#include "FluidSim.h"
 
-class ofApp : public ofBaseApp{
-
+class ofApp : public ofBaseApp
+{
 	public:
 		void setup();
 		void update();
 		void draw();
 		void exit();
 
-		void keyPressed(int key);
-		void keyReleased(int key);
-		void mouseMoved(int x, int y );
 		void mouseDragged(int x, int y, int button);
 		void mousePressed(int x, int y, int button);
 		void mouseReleased(int x, int y, int button);
-		void mouseEntered(int x, int y);
-		void mouseExited(int x, int y);
-		void windowResized(int w, int h);
-		void dragEvent(ofDragInfo dragInfo);
-		void gotMessage(ofMessage msg);
-		
 
-	Fluid* fluid;
-	Fluid::FluidGrid* fluidGrid;
 
-	int lastMouseX = 0, lastMouseY = 0;
+	private:
+		FluidSim* fluidSim;
+		float densityAddAmount = 100;
+
+		int mouseX = 0, mouseY = 0, oldMouseX = 0, oldMouseY = 0;
+		bool button0, button2;
+
+		ofxPanel gui;
+
+		ofxFloatSlider sliderDiffusion;
+		ofxFloatSlider sliderViscosity;
+		ofxFloatSlider sliderDensityAmount;
+
+		ofxButton btnClearDensity;
+		ofxToggle toggleSystemClosed;
+		ofxToggle toggleDrawVelocity;
 };

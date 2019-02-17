@@ -1,9 +1,6 @@
 #include "ofMain.h"
 #include "ofApp.h"
 
-constexpr auto GRID_SIZE = 64;
-constexpr auto GRID_SCALE = 10;
-
 //========================================================================
 int main()
 {
